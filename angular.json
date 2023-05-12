@@ -18,7 +18,8 @@
             "main": "src/main.ts",
             "assets": [],
             "styles": ["src/global_styles.css"],
-            "scripts": []
+            "scripts": [],
+            "tsConfig": "tsconfig.json"
           },
           "configurations": {
             "production": {
@@ -43,7 +44,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo:build"
+            "browserTarget": "demo:build",
           },
           "configurations": {
             "production": {
