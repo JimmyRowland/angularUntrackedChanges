@@ -3,10 +3,10 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BehaviorSubject, delay, ReplaySubject, switchMap, tap } from 'rxjs';
-import { EntriesService } from 'src/entries.service';
+import { EntriesService } from './entries.service';
 import { FormsModule } from '@angular/forms';
-import { Entry } from 'src/utils/fetch';
-import { ObservableComponent } from 'src/observable.component';
+import { Entry } from './utils/fetch';
+import { ObservableComponent } from './observable.component';
 
 @Component({
   selector: 'my-app',
@@ -48,7 +48,8 @@ import { ObservableComponent } from 'src/observable.component';
   `,
 })
 export class App {
-  entriesService = inject(EntriesService);
+  constructor(private entriesService: EntriesService) {
+  }
   entries = this.entriesService.getEntries().pipe(tap(console.log));
   disabledSubject = new BehaviorSubject(false);
   expensiveCalculatedDisabled = this.disabledSubject.pipe(delay(1000));

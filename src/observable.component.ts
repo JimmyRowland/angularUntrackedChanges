@@ -1,8 +1,8 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, combineLatest, delay, map, merge, of, ReplaySubject, startWith, switchMap, tap } from 'rxjs';
-import { DisableService } from 'src/disable.service';
-import { App } from 'src/main';
+import { DisableService } from './disable.service';
+import { App } from './main';
 
 @Component({
   selector: 'observable-disable-button',
