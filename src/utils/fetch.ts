@@ -6,7 +6,7 @@ export type Entry = {
 
 function getEntry(index: number): Entry {
   return {
-    name: `entry${index}`,
+    name: `entry${index} ${index % 3 === 0 ? 'enabled' : 'disabled'}`,
     id: index,
     editableSlow: () => new Promise(resolve => {
       setTimeout(() => resolve(index % 3 === 0), 1000)
