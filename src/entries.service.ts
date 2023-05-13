@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, switchMap } from 'rxjs';
-import { fetchEntries } from 'src/utils/fetch';
+import { fetchEntries } from './utils/fetch';
 
 @Injectable({
   providedIn: 'root'
