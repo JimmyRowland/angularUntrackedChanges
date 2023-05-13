@@ -10,7 +10,7 @@ export class DisableService {
   disabled$ = this.disabled.asObservable();
 
   toggleDisabled() {
-    this.disabled.next(this.disabled.value);
+    this.disabled.next(!this.disabled.value);
   }
 
   constructor() {

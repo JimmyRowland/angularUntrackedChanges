@@ -13,6 +13,7 @@ import { BrokenSubscriptionComponent } from 'src/broken-subscription.component';
 import { MemoComponent } from 'src/memo.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SignalComponent } from 'src/signal.component';
+import { DisableService } from 'src/disable.service';
 
 @Component({
   selector: 'my-app',
@@ -22,7 +23,9 @@ import { SignalComponent } from 'src/signal.component';
   template: `
       <div>
           <label> <input type="checkbox" (change)="toggleDisabled()"
-                         [checked]="disabledSubject | async"/>disabled</label>
+                         [checked]="disabledSubject | async"/>disabled prop</label>
+          <label> <input type="checkbox" (change)="disabledService.toggleDisabled()"
+                         [checked]="disabledService.disabled$ | async"/>disabled service</label>
       </div>
       <div>
           components
@@ -66,7 +69,7 @@ import { SignalComponent } from 'src/signal.component';
   `,
 })
 export class App {
-  constructor(private entriesService: EntriesService) {
+  constructor(private entriesService: EntriesService, readonly disabledService: DisableService) {
   }
   entries = this.entriesService.getEntries().pipe(tap(console.log));
   disabledSubject = new BehaviorSubject(false);
