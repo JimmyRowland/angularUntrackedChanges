@@ -7,13 +7,13 @@ import { EntriesService } from './entries.service';
 import { FormsModule } from '@angular/forms';
 import { Entry } from './utils/fetch';
 import { ObservableComponent } from './observable.component';
-import { BadSubscriptionComponent } from 'src/bad-subscription.component';
-import { SubscriptionComponent } from 'src/subscription.component';
-import { BrokenSubscriptionComponent } from 'src/broken-subscription.component';
-import { MemoComponent } from 'src/memo.component';
+import { BadSubscriptionComponent } from './bad-subscription.component';
+import { SubscriptionComponent } from './subscription.component';
+import { BrokenSubscriptionComponent } from './broken-subscription.component';
+import { MemoComponent } from './memo.component';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { SignalComponent } from 'src/signal.component';
-import { DisableService } from 'src/disable.service';
+import { SignalComponent } from './signal.component';
+import { DisableService } from './disable.service';
 
 @Component({
   selector: 'my-app',
