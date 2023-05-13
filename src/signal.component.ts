@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Input, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, Input, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DisableService } from './disable.service';
 import { App } from './main';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map, merge, of, startWith, switchMap } from 'rxjs';
+import { from, map, merge, of, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'signal-disable-button',
@@ -28,6 +28,10 @@ export class SignalComponent{
   appComponent = inject(App);
   // selectedDisabledEntry = signal(true);
   selectedDisabledEntry = toSignal(this.appComponent.selected.pipe(switchMap(entry => merge(of(false), entry.editableSlow())), map(editable => !editable), startWith(true)))
+  // selectedDisabledEntry = computed(() => {
+  //   const editablePromise = toSignal(this.appComponent.selected)()?.editableSlow();
+  //   return editablePromise ? toSignal(from(editablePromise))() || false : true
+  // })
   disabledFromService = toSignal(this.disableService.disabled$);
 
   isDisabled = computed(() => {
@@ -35,21 +39,10 @@ export class SignalComponent{
   })
 
   constructor(private disableService: DisableService) {
-    /**
-     * effect is broken when selectedDisabledEntry is set twice
-     */
-    // effect(() => {
-    //   console.log('prop is tracked', this.disabled?.())
-    // })
-    // effect(() => {
-    //   console.log('service is tracked', this.disabledFromService())
-    // })
-    // const selection = toSignal(this.appComponent.selected);
-    //
-    // effect(() => {
-    //   // console.log('injected component is tracked', this.selection())
-    //   this.selectedDisabledEntry?.set(true);
-    //   selection()?.editableSlow().then(editable => this.selectedDisabledEntry.set(!editable))
-    // })
+  //   const selection = toSignal(this.appComponent.selected);
+  //   effect(() => {
+  //     this.selectedDisabledEntry?.set(true);
+  //     selection()?.editableSlow().then(editable => this.selectedDisabledEntry.set(!editable))
+  //   }, {allowSignalWrites: true})
   }
 }
